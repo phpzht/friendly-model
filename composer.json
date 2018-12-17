@@ -1,0 +1,24 @@
+{
+    "name": "phpzht/friendly-model",
+    "type": "library",
+    "description": "Friendly Model",
+    "keywords": ["laravel", "model"],
+    "homepage": "https://www.phpzht.com",
+    "authors": [
+        {
+            "name": "phpzht",
+            "email": "phpzhe@163.com"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3"
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": {
+          "Phpzht\\FriendlyModel\\": "src/"
+        }
+    }
+}
