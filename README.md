@@ -2,7 +2,7 @@
 #### 创建一个带属性注释的model，让这个IDE能够提示这个model的属性
 
 引入：
-将此命令在laravel中注册，并自行解决namespace问题。
+执行composer require phpzht/friendly-model或者composer require phpzht/friendly-model:dev-master，然后将此命令在laravel中注册，并自行解决namespace问题。
 
 使用：
 整个命令是复制laravel框架本身的model generator，并做修改，保留了原来命令的所有功能。
