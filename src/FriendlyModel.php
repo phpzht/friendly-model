@@ -69,10 +69,10 @@ class FriendlyModel extends GeneratorCommand
     protected function createFactory()
     {
         $factory = Str::studly(class_basename($this->argument('name')));
-        $this->call('make:factory', [
+        $this->call('make:factory', array(
             'name' => "{$factory}Factory",
             '--model' => $this->argument('name'),
-        ]);
+        ));
     }
 
     /**
@@ -86,10 +86,10 @@ class FriendlyModel extends GeneratorCommand
         if ($this->option('pivot')) {
             $table = Str::singular($table);
         }
-        $this->call('make:migration', [
+        $this->call('make:migration', array(
             'name' => "create_{$table}_table",
             '--create' => $table,
-        ]);
+        ));
     }
 
     /**
@@ -101,10 +101,10 @@ class FriendlyModel extends GeneratorCommand
     {
         $controller = Str::studly(class_basename($this->argument('name')));
         $modelName = $this->qualifyClass($this->getNameInput());
-        $this->call('make:controller', [
+        $this->call('make:controller', array(
             'name' => "{$controller}Controller",
             '--model' => $this->option('resource') ? $modelName : null,
-        ]);
+        ));
     }
 
     /**
@@ -128,7 +128,7 @@ class FriendlyModel extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/model.stub';
+        return __DIR__ . '/stub/model.stub';
     }
 
     /**
@@ -143,9 +143,10 @@ class FriendlyModel extends GeneratorCommand
         } else {
             $query = DB::table('information_schema.columns');
         }
-        $list = $query->select([
-            'COLUMN_NAME', 'DATA_TYPE', 'COLUMN_COMMENT'
-        ])
+
+        $list = $query->select(
+            array('COLUMN_NAME', 'DATA_TYPE', 'COLUMN_COMMENT')
+        )
             ->where('table_name', $this->argument('table'))
             ->where('table_schema', config('database.connections.mysql.database'))
             ->get()->toJson();
@@ -170,7 +171,7 @@ class FriendlyModel extends GeneratorCommand
         $type = strtolower($type);
         if (strpos($type, 'int') !== false || strpos($type, 'year') !== false) {
             return 'int';
-        } elseif (in_array($type, ['float', 'double', 'decimal'])) {
+        } elseif (in_array($type, array('float', 'double', 'decimal'))) {
             return 'float';
         } elseif (strpos($type, 'char') !== false || strpos($type, 'text') !== false || strpos($type, 'blob') !== false) {
             return 'string';
@@ -244,9 +245,9 @@ class FriendlyModel extends GeneratorCommand
      */
     protected function getArguments()
     {
-        return array_merge(parent::getArguments(), [
-            ['table', InputArgument::REQUIRED, 'The name of the class']
-        ]);
+        return array_merge(parent::getArguments(), array(
+            array('table', InputArgument::REQUIRED, 'The name of the class')
+        ));
     }
 
     /**
@@ -256,16 +257,16 @@ class FriendlyModel extends GeneratorCommand
      */
     protected function getOptions()
     {
-        return [
-            ['all', 'a', InputOption::VALUE_NONE, 'Generate a migration, factory, and resource controller for the model'],
-            ['controller', 'c', InputOption::VALUE_NONE, 'Create a new controller for the model'],
-            ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
-            ['force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'],
-            ['migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model'],
-            ['pivot', 'p', InputOption::VALUE_NONE, 'Indicates if the generated model should be a custom intermediate table model'],
-            ['resource', 'r', InputOption::VALUE_NONE, 'Indicates if the generated controller should be a resource controller'],
-            ['connection', 'd', InputOption::VALUE_REQUIRED, 'Database connection in database config file']
-        ];
+        return array(
+            array('all', 'a', InputOption::VALUE_NONE, 'Generate a migration, factory, and resource controller for the model'),
+            array('controller', 'c', InputOption::VALUE_NONE, 'Create a new controller for the model'),
+            array('factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'),
+            array('force', null, InputOption::VALUE_NONE, 'Create the class even if the model already exists'),
+            array('migration', 'm', InputOption::VALUE_NONE, 'Create a new migration file for the model'),
+            array('pivot', 'p', InputOption::VALUE_NONE, 'Indicates if the generated model should be a custom intermediate table model'),
+            array('resource', 'r', InputOption::VALUE_NONE, 'Indicates if the generated controller should be a resource controller'),
+            array('connection', 'd', InputOption::VALUE_REQUIRED, 'Database connection in database config file')
+        );
     }
 }
 ?>
