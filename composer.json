@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-          "Phpzht\\FriendlyModel\\": "src/"
+          "Phpzht\\LaravelFrendly\\": "src/"
         }
     }
 }
