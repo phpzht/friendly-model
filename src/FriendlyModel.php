@@ -1,6 +1,6 @@
 <?php
 
-namespace Phpzht\FriendlyModel;
+namespace Phpzht\LaravelFrendly;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
