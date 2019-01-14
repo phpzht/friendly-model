@@ -148,7 +148,6 @@ class FriendlyModel extends GeneratorCommand
             array('COLUMN_NAME', 'DATA_TYPE', 'COLUMN_COMMENT')
         )
             ->where('table_name', $this->argument('table'))
-            ->where('table_schema', config('database.connections.mysql.database'))
             ->get()->toJson();
         $list = json_decode($list, true);
         $temp = " * @property %s %s %s\n";
