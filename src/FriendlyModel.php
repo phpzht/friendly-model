@@ -140,14 +140,20 @@ class FriendlyModel extends GeneratorCommand
     {
         if ($dc = $this->getOptionConnection()) {
             $query = DB::connection($dc)->table('information_schema.columns');
+            $conn = config('database.connections.' . $dc);
+            $dbName = $conn['database'];
         } else {
             $query = DB::table('information_schema.columns');
+            $connDef = config('database.default');
+            $conn = config('database.connections.' . $connDef);
+            $dbName = $conn['database'];
         }
 
         $list = $query->select(
             array('COLUMN_NAME', 'DATA_TYPE', 'COLUMN_COMMENT')
         )
             ->where('table_name', $this->argument('table'))
+            ->where('table_schema', $dbName)
             ->get()->toJson();
         $list = json_decode($list, true);
         $temp = " * @property %s %s %s\n";
@@ -268,4 +274,5 @@ class FriendlyModel extends GeneratorCommand
         );
     }
 }
+
 ?>
